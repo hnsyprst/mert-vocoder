@@ -1,0 +1,37 @@
+# @package _global_
+
+defaults:
+  - /tags: default
+  - override /trainer: default
+  - override /model: model
+  - override /data: example
+  - override /callbacks: default
+
+tags:
+  model: simple
+run_name: "first"
+description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+
+seed: 64
+float32_matmul_precision: high
+
+trainer:
+  max_epochs: 10
+  gradient_clip_val: 1.0
+
+model:
+  net:
+    num_channels: ${data.dataset_class.num_channels}
+  optimizer:
+    lr: 0.002
+
+data:
+  batch_size: 64
+  dataset_class:
+    strict_validation: false
+
+loggers:
+  mlflow:
+    tags: ${tags}
+    run_name: ${run_name}
+    experiment_name: ${experiment_name}

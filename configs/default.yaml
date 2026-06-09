@@ -1,0 +1,24 @@
+# @package _global_
+
+# specify here default configuration
+# order of defaults determines the order in which configs override each other
+defaults:
+  - _self_
+  - data: example
+  - model: model
+  - callbacks: default
+  - loggers: default
+  - trainer: default
+  - paths: default
+  - hydra: default
+
+  # experiment configs allow for version control of specific hyperparameters
+  - experiment: null
+
+  # debugging config (enable through command line, e.g. `uv run train.py debug=default`)
+  - debug: null
+
+# task name, determines output directory path
+task_name: "train"
+
+experiment_name: "MERT Vocoder"

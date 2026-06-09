@@ -13,7 +13,7 @@ model_checkpoint:
   auto_insert_metric_name: False
 
 logged_rich_model_summary:
-  max_depth: -1
+  max_depth: 3
 
 on_exception_checkpoint:
   dirpath: ${paths.output_dir}/checkpoints

@@ -1,0 +1,33 @@
+_target_: vae.models.components.mimi.Decoder
+
+frame_rate: 75
+sample_rate: 24000
+
+seanet_decoder:
+  _target_: vae.models.components.seanet.Decoder
+  num_blocks: 4
+  num_conv_channels: [ 32, 64, 128, 256, 512 ]
+  conv_strides: [ 4, 4, 4, 5 ]
+  residual_unit_dilations: [ 1 ]
+  residual_unit_hidden_compression_factor: 2
+  latent_dim_size: 1024  # matches the MERT feature width fed in as the decoder latent
+  latent_conv_kernel_size: 7
+  use_weight_norm: true
+  last_conv_kernel_size: 3
+  use_skip_connections: false
+
+transformer:
+  _target_: vae.models.components.modules.transformer.StreamingTransformer
+  model_dimension: 1024  # must equal seanet_decoder.latent_dim_size (the upsample conv is channel-preserving)
+  num_heads: 8  # Doesn't say in the CALM paper, I reckon either 4 or 8
+  num_layers: 8
+  context_length: 750  # 10 seconds
+  dropout_probability: 0.0
+  layer_scale: 0.01
+  norm:
+    _target_: torch.nn.LayerNorm
+    _partial_: true
+    eps: 1e-5
+  feedforward_dimension: 2048
+  feedforward_activation:
+    _target_: torch.nn.GELU

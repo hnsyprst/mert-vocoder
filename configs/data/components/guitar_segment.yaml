@@ -1,0 +1,10 @@
+_target_: mert_vocoder.data.components.guitar_segment_dataset.GuitarSegmentDataset
+
+# path to the splitter metadata CSV (e.g. `train_metadata.csv`)
+metadata_csv: ???
+# produce audio matching the MERT model's expected sample rate
+sample_rate: ${model.sample_rate}
+num_channels: 1
+# return full variable-length segments (we process one item at a time, so no batching)
+audio_duration: 10
+strict_validation: false

@@ -3,8 +3,8 @@
 defaults:
   - /tags: default
   - override /trainer: default
-  - override /model: model
-  - override /data: example
+  - override /model: mert_mimi
+  - override /data: precomputed_features
   - override /callbacks: default
 
 tags:
@@ -16,17 +16,10 @@ seed: 64
 float32_matmul_precision: high
 
 trainer:
-  max_epochs: 10
-  gradient_clip_val: 1.0
-
-model:
-  net:
-    num_channels: ${data.dataset_class.num_channels}
-  optimizer:
-    lr: 0.002
+  max_epochs: 9999
 
 data:
-  batch_size: 64
+  batch_size: 8
   dataset_class:
     strict_validation: false
 

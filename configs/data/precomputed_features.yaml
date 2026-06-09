@@ -1,0 +1,16 @@
+defaults:
+  - components/precomputed_features_dataset@dataset_class
+  - _self_
+
+_target_: mert_vocoder.data.example_datamodule.ExampleDataModule
+
+# `ExampleDataModule` instantiates the dataset itself in `setup()`, so pass it as a partial
+dataset_class:
+  _partial_: true
+  data_dir: /mnt/data/mert-vocoder
+
+batch_size: null  # Needs to be divisible by the number of devices (e.g., if in a distributed setup)
+train_val_test_split: [0.9, 0.05, 0.05]
+num_workers: 16
+pin_memory: True
+seed: ${seed}

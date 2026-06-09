@@ -1,0 +1,13 @@
+_target_: mert_vocoder.models.components.ssl_encoder_wrapper.SslEncoderWrapper
+
+model:
+  _target_: transformers.AutoModel.from_pretrained
+  pretrained_model_name_or_path: m-a-p/MERT-v1-330M
+  trust_remote_code: true
+
+preprocessor:
+  _target_: transformers.Wav2Vec2FeatureExtractor.from_pretrained
+  pretrained_model_name_or_path: "m-a-p/MERT-v1-330M"
+  trust_remote_code: true
+
+sample_rate: 24000

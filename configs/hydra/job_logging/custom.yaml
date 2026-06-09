@@ -1,12 +1,12 @@
 version: 1
 formatters:
   console:
-    (): src.utils.rich_logging.RenderableFormatter
+    (): src.mert_vocoder.utils.rich_logging.RenderableFormatter
   file:
     format: "[%(asctime)s][%(levelname)s] - %(message)s"
 handlers:
   console:
-    class: src.utils.rich_logging.RenderableHandler
+    class: src.mert_vocoder.utils.rich_logging.RenderableHandler
     formatter: console
     markup: true
     rich_tracebacks: true

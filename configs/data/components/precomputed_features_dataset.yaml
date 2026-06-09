@@ -1,0 +1,7 @@
+_target_: mert_vocoder.data.components.precomputed_feature_dataset.PrecomputedFeatureDataset
+
+# directory of `<stem>.pt` / `<stem>.wav` pairs written by `scripts/compute_mert_embeddings.py`
+data_dir: ???
+feature_extension: pt
+audio_extension: wav
+strict_validation: true

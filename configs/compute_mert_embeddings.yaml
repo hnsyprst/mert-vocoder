@@ -1,0 +1,20 @@
+defaults:
+  - _self_
+  - model/components@model: mert
+  - data/components@dataset: guitar_segment
+  - paths: default
+  - hydra: default
+
+# root directory to write computed features (`.pt`) and audio (`.wav`) to
+output_root: ???
+
+# device to run the MERT model on
+device: cuda
+
+# how many items to run through MERT at once, and dataset worker processes
+batch_size: 16
+num_workers: 8
+
+# task name, determines output directory path
+task_name: "compute_mert_embeddings"
+run_name: "compute_mert_embeddings"

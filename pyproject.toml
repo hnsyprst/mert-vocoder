@@ -1,3 +1,7 @@
+[build-system]
+requires = ["uv_build>=0.10.0,<0.11.0"]
+build-backend = "uv_build"
+
 [project]
 name = "mert-vocoder"
 version = "0.1.0"
@@ -15,7 +19,10 @@ dependencies = [
     "soxr>=1.0.0",
     "torch>=2.10.0",
     "torchaudio>=2.10.0",
+    "torchcodec~=0.10",
     "torchmetrics>=1.8.2",
+    "transformers>=5.10.2",
+    "vae",
 ]
 
 [dependency-groups]
@@ -52,3 +59,6 @@ select = [
 [tool.ty.environment]
 root = ["./src"]
 python = ".venv"
+
+[tool.uv.sources]
+vae = { git = "https://github.com/hnsyprst/vae" }

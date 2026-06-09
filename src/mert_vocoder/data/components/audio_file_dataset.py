@@ -11,7 +11,7 @@ from rich.console import Console
 from rich.table import Table
 from torchaudio.transforms import Resample
 
-from utils.audio import audioread
+from mert_vocoder.utils.audio import audioread
 
 log = logging.getLogger(__name__)
 

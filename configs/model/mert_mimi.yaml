@@ -1,0 +1,47 @@
+defaults:
+  # - components/mert@encoder
+  - components/mimi_decoder@decoder
+  - _self_
+
+_target_: mert_vocoder.models.vocoder_module.VocoderLightningModule
+
+gradient_accumulation_steps: 16
+
+discriminator:
+  _target_: vae.models.components.discriminator.MultiScaleStftDiscriminator
+  num_fft_bins: [ 1024, 2048, 512, 256, 128 ]
+  hop_lengths: [ 256, 512, 128, 64, 32 ]
+  window_lengths: [ 1024, 2048, 512, 256, 128 ]
+  conv_num_channels: 32
+  conv_kernel_size: [ 3, 9 ]
+  conv_dilations: [ 1, 2, 4 ]
+  conv_stride: [ 1, 2 ]
+  is_stft_normalized: true
+  activation:
+    _target_: torch.nn.LeakyReLU
+    negative_slope: 0.3
+
+generator_optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 8e-4
+  weight_decay: 5e-2
+  betas: [ 0.5, 0.9 ]
+
+discriminator_optimizer:
+  _target_: torch.optim.Adam
+  _partial_: true
+  lr: 3e-4
+  weight_decay: 0.0
+  betas: [ 0.5, 0.9 ]
+
+adversarial_criterion:
+  _target_: vae.losses.hinge.HingeLoss
+
+feature_map_criterion:
+  _target_: torch.nn.L1Loss
+
+reconstruction_criterion:
+  _target_: vae.losses.reconstruction.MultiScaleMelSpectrogramLoss
+  sample_rate: 24000
+reconstruction_loss_weight: 15.0

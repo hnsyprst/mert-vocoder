@@ -4,7 +4,7 @@ import hydra
 import omegaconf
 from omegaconf import OmegaConf
 
-from utils.mlflow import get_mlflow_tracking_uri_and_authenticate
+from mert_vocoder.utils.mlflow import get_mlflow_tracking_uri_and_authenticate
 
 
 def register_resolvers():

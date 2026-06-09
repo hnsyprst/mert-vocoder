@@ -10,7 +10,7 @@ from lightning import Callback, LightningDataModule, LightningModule, Trainer, s
 from lightning.pytorch.loggers import Logger
 from omegaconf import DictConfig
 
-from utils.resolvers import register_resolvers
+from mert_vocoder.utils.resolvers import register_resolvers
 
 # Log full error tracebacks
 os.environ["HYDRA_FULL_ERROR"] = "1"
@@ -27,7 +27,7 @@ for name in ["lightning", "lightning.pytorch"]:
 register_resolvers()
 
 
-@hydra.main(version_base="1.3", config_path="../configs", config_name="default.yaml")
+@hydra.main(version_base="1.3", config_path="../../configs", config_name="default.yaml")
 def main(cfg: DictConfig):
     log.info("Starting a new training job.")
     log.info(f":card_index: {'[bold green]Job Name:[/]':<35}{cfg.run_name}")
